@@ -1,0 +1,7 @@
+.ctg{
+      display: flex;
+      justify-items: center;
+      flex-wrap: wrap;
+      flex: 50%;
+      margin-left: 0.3vw
+}

@@ -1,0 +1,19 @@
+.spf{
+      margin-left: 1vw;
+      margin-top: 5vh;
+}
+
+.time{
+      margin-top: 1vh;
+}
+
+.inputTime{
+      width: 14vw;
+      height: 5vh;
+      border-radius: 0.6rem;
+}
+
+.checkboxes{
+      font-size: 18px;
+}
+

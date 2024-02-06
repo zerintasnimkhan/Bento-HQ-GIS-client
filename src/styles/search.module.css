@@ -1,0 +1,18 @@
+.searchIcon{
+      width: 1.5vw;
+      height: 3vh;
+      margin-left: -2vw;
+      margin-top: 0.3vw;
+    }
+
+.input{
+      width: 13.5vw;
+      height: 4vh;
+      margin-left: 1vw;
+      margin-bottom: 3vh;
+      border-radius: 1vw;
+}
+
+.fields{
+      display: flex;
+}
