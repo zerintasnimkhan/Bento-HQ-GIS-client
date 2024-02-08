@@ -3,6 +3,7 @@ import React from 'react'
 import styles from '../styles/icons.module.css'
 
 function CustomerIcon() {
+  
   return (
     <div> 
       <img className={styles.icons}

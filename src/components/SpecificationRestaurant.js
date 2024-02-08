@@ -2,8 +2,14 @@
 import React from "react";
 import { useState } from "react";
 import styles from "../styles/specification.module.css";
+import { useAppSelector } from "../app/hooks";
 
 function SpecificationRestaurant() {
+
+  const type =  useAppSelector((state) => state.selectMap.type);
+  console.log(type);
+
+
   const [checkboxes, setCheckboxes] = useState({
     HU: false,
     MU: false,

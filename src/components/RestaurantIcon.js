@@ -1,11 +1,12 @@
 "use-client";
 import React from "react";
-import styles from '../styles/icons.module.css'
+import styles from "../styles/icons.module.css";
 
-function RestaurantIcon() {
+function RestaurantIcon({ handleClick}) {
   return (
-    <div>
-      <img className={styles.icons}
+    <div onClick={() => handleClick(restaurant)}>
+      <img
+        className={styles.icons}
         src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1707139129/restaurant_gzmskj.png"
       ></img>
     </div>
