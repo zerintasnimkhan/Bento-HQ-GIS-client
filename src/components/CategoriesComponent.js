@@ -11,7 +11,7 @@ import RiderIcon from "./RiderIcon";
 
 function CategoriesComponent() {
 
-
+  
   const dispatch = useAppDispatch();
 
   function handleClick(type) {
@@ -21,10 +21,10 @@ function CategoriesComponent() {
 
   return (
     <div className={styles.ctg}>
-      <RestaurantIcon handleClick={handleClick("restaurant")} />
-      <CustomerIcon handleClick={handleClick("customer")} />
-      <HubsIcon handleClick={handleClick("hub")} />
-      <RiderIcon handleClick={handleClick("rider")} />
+      <RestaurantIcon handleClick={handleClick} />
+      <CustomerIcon handleClick={handleClick} />
+      <HubsIcon handleClick={handleClick} />
+      <RiderIcon handleClick={handleClick} />
     </div>
   );
 }
