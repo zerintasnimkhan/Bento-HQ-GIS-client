@@ -1,19 +1,13 @@
 "use-client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
 import "../styles/Map.module.css";
 import styles from "../styles/icons.module.css";
 import RestaurantIcon from "./icons/Restaurant.jsx";
 import RiderIcon from "./icons/Rider";
 import CustomerIcon from "./icons/Customer";
 import HubIcon from "./icons/hub";
-
-// import
-
-//import { Marker } from "antd";
-
-//import "./MapComponent.css"; // Import your CSS file for styling
 
 const iconDict = {
   restaurant: <RestaurantIcon />,
@@ -23,21 +17,19 @@ const iconDict = {
 };
 
 const MapComponent = () => {
-  
-  // const [visible, setVisible] = useState({
-  //   latitude: 37.7749,
-  //   longitude: -122.4194,
-  //   zoom: 12,
-  //   width: "100%",
-  //   height: "100%",
-  // });
+
+  // const dispatch = useAppDispatch();
+  // const type = useAppSelector((state) => state.selectMap.type);
   const markers = useAppSelector((state) => state.selectMap.filteredMarkers);
   //console.log(markers);
+  // useEffect(() => {
+  //   dispatch(filterMarkers()); // Assuming filterMarkers does not take any arguments
+  // }, [dispatch, type]);
 
-  const markerPosition = {
-    latitude: 37.7749,
-    longitude: -122.4194,
-  };
+  // const markerPosition = {
+  //   latitude: 37.7749,
+  //   longitude: -122.4194,
+  // };
 
   return (
     <ReactMapGL
