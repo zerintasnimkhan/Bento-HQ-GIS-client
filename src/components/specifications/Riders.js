@@ -1,7 +1,7 @@
 "use-client";
 import React from "react";
 import { useState } from "react";
-import styles from "../styles/specification.module.css";
+import styles from "../../styles/specification.module.css";
 
 function Riders() {
   const [checkboxes, setCheckboxes] = useState({
@@ -49,6 +49,7 @@ function Riders() {
             checked={checkboxes.MU}
             onChange={() => handleCheckboxChange("MU")}
           />
+          One Order Riders
         </label>
       </div>
 
@@ -59,7 +60,7 @@ function Riders() {
             checked={checkboxes.LU}
             onChange={() => handleCheckboxChange("LU")}
           />
-          One Order Rider
+          Two Order Riders
         </label>
       </div>
       <div className={styles.time}>

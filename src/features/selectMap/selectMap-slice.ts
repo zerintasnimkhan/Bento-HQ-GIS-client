@@ -55,8 +55,15 @@ const selectMapSlice = createSlice({
   reducers: {
     updateType(state, action: PayloadAction<string>) {
       state.type = action.payload;
+      state.filteredMarkers = [];
+    },
+    filterMarkers(state) {
+      state.filteredMarkers = state.filteredMarkers.filter(
+        (marker) => marker.type === state.type
+      );
     },
   },
 });
 
+export const { updateType, filterMarkers } = selectMapSlice.actions;
 export default selectMapSlice.reducer;

@@ -1,9 +1,12 @@
 "use-client";
 import React from "react";
+import { useAppSelector } from "../../app/hooks";
 import { useState } from "react";
-import styles from "../styles/specification.module.css";
+import styles from "../../styles/specification.module.css";
 
 function Hubs() {
+  const type =  useAppSelector((state) => state.selectMap.type);
+
   const [checkboxes, setCheckboxes] = useState({
     HU: false,
     MU: false,
@@ -38,7 +41,7 @@ function Hubs() {
             checked={checkboxes.HU}
             onChange={() => handleCheckboxChange("HU")}
           />
-          HU (High Utilization)
+          High Capacity hubs
         </label>
       </div>
 
@@ -49,7 +52,7 @@ function Hubs() {
             checked={checkboxes.MU}
             onChange={() => handleCheckboxChange("MU")}
           />
-          MU (Moderate Utilization)
+          Medium Capacity hubs
         </label>
       </div>
 
@@ -60,7 +63,7 @@ function Hubs() {
             checked={checkboxes.LU}
             onChange={() => handleCheckboxChange("LU")}
           />
-          LU (Low Utilization)
+          Low Capacity hubs
         </label>
       </div>
       <div className={styles.time}>

@@ -1,9 +1,12 @@
 "use-client";
 import React from "react";
+import { useAppSelector } from "../../app/hooks";
 import { useState } from "react";
-import styles from "../styles/specification.module.css";
+import styles from "../../styles/specification.module.css";
 
 function Customers() {
+
+  const type =  useAppSelector((state) => state.selectMap.type);
   const [checkboxes, setCheckboxes] = useState({
     HU: false,
     MU: false,
@@ -38,7 +41,7 @@ function Customers() {
             checked={checkboxes.HU}
             onChange={() => handleCheckboxChange("HU")}
           />
-          HU (High Utilization)
+          Highly likely to quick order
         </label>
       </div>
 
@@ -49,7 +52,7 @@ function Customers() {
             checked={checkboxes.MU}
             onChange={() => handleCheckboxChange("MU")}
           />
-          MU (Moderate Utilization)
+          Oppened the app
         </label>
       </div>
 
@@ -60,7 +63,7 @@ function Customers() {
             checked={checkboxes.LU}
             onChange={() => handleCheckboxChange("LU")}
           />
-          LU (Low Utilization)
+          Place order
         </label>
       </div>
       <div className={styles.time}>
