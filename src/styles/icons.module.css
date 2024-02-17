@@ -2,8 +2,18 @@
       width: 5rem;
       height: 4rem;
       padding: 1rem;
-      box-shadow: 0 0 0 2px grey;
+      cursor: pointer;
       border-radius: 1rem;
-      box-shadow: 5px 5px 8px 8px grey;
-      margin: 0.5rem
+      box-shadow: 0 0 0 2px grey, 2px 2px 4px 0px lightgrey;
+      margin: 0.5rem;
+      transition: background-color 0.3s ease-in-out;
 }
+
+.selectedIcon {
+      /* Styles for the selected icon */
+      background-color: #4caf50; /* Change this color as per your design */
+      color: #fff; /* Change this color as per your design */
+      border-radius: 1rem;
+      
+      
+    }

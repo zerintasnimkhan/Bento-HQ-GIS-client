@@ -58,6 +58,7 @@ const selectMapSlice = createSlice({
       // state.filteredMarkers = [];
     },
     filterMarkers(state) {
+      state.filteredMarkers = initialState.filteredMarkers;
       state.filteredMarkers = state.filteredMarkers.filter(
         (marker) => marker.type === state.type
       );

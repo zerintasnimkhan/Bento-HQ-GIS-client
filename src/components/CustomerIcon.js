@@ -2,9 +2,12 @@
 import React from "react";
 import styles from "../styles/icons.module.css";
 
-function CustomerIcon({ handleClick }) {
+function CustomerIcon({ handleClick, isSelected }) {
   return (
-    <div onClick={() => handleClick("customer")}>
+    <div
+      className={`${styles.icon} ${isSelected ? styles.selectedIcon : ""}`}
+      onClick={() => handleClick("customer")}
+    >
       <img
         className={styles.icons}
         src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1707197659/multiple-users-silhouette_1_xhz3gd.png"
