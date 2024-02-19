@@ -18,7 +18,7 @@ const LoginPage = () => {
       const res = await login(email, password);
       const token = res;
       localStorage.setItem("access-token", token);
-      router.push('/map');
+      router.push("/map");
       // navigate("/map");
     } catch (error) {
       console.log(error);
@@ -42,7 +42,9 @@ const LoginPage = () => {
 
       {/* Right side with login form */}
       <div className={styles.formContainer}>
-        <h2>Login</h2>
+        <br></br>
+        <h2>Sign up for Bento Headquarters</h2>
+        <br></br>
         <form className={styles.loginForm}>
           {/* Add your form fields here (e.g., username, password) */}
           <label className={styles.label}>
@@ -53,8 +55,8 @@ const LoginPage = () => {
             Email:
             <input
               className={styles.input}
-              type="text"
-              name="username"
+              type="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -69,10 +71,18 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <button className={styles.button} type="submit" onClick={handleLogin}>
+          <button
+            className={styles.button}
+            type="submit"
+            onClick={() => router.push("/map")}
+          >
             Login
           </button>
-          <button className={styles.button} type="submit">
+          <button
+            className={styles.button}
+            type="submit"
+            onClick={() => router.push("/map")}
+          >
             sign up
           </button>
         </form>
