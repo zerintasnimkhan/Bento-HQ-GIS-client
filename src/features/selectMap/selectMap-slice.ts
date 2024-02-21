@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 interface Markers {
   lat: string;
   lng: string;
@@ -16,38 +16,70 @@ const initialState: Map = {
   type: "",
   specifications: {},
   filteredMarkers: [
-    {
-      lat: "51.51974",
-      lng: "-0.094021",
-      type: "restaurant",
-      body: {},
-    },
-    {
-      lat: "51.512441",
-      lng: "-0.126851",
-      type: "customer",
-      body: {},
-    },
-    {
-      lat: "51.513769",
-      lng: "-0.19373",
-      type: "rider",
-      body: {},
-    },
-    {
-      lat: "51.564367",
-      lng: "-0.13494",
-      type: "hub",
-      body: {},
-    },
-    {
-      lat: "51.512984",
-      lng: "-0.139728",
-      type: "hub",
-      body: {},
-    },
+    // {
+    //   lat: "51.51974",
+    //   lng: "-0.094021",
+    //   type: "restaurant",
+    //   body: {},
+    // },
+    // {
+    //   lat: "51.512441",
+    //   lng: "-0.126851",
+    //   type: "customer",
+    //   body: {},
+    // },
+    // {
+    //   lat: "51.513769",
+    //   lng: "-0.19373",
+    //   type: "rider",
+    //   body: {},
+    // },
+    // {
+    //   lat: "51.564367",
+    //   lng: "-0.13494",
+    //   type: "hub",
+    //   body: {},
+    // },
+    // {
+    //   lat: "51.512984",
+    //   lng: "-0.139728",
+    //   type: "hub",
+    //   body: {},
+    // },
   ],
 };
+
+export const fetchMarkersFromJson = createAsyncThunk(
+  "selectMap/fetchMarkersFromJson",
+  async () => {
+    try {
+      const customerResponse = await fetch("/markersData/customers.json");
+      const customerData = await customerResponse.json();
+      const mappedCustomerData = customerData.data.map((customer) => ({
+        lat: customer.currentLatLong.latitude,
+        lng: customer.currentLatLong.longitude,
+        type: "customer",
+        body: {},
+      }));
+
+      const riderResponse = await fetch(
+        "https://bento-rider.onrender.com/rider/all"
+      );
+      const riderData = await riderResponse.json();
+      const mappedRiderData = riderData.riders.map((rider) => ({
+        lat: rider.currentLatLong.latitude,
+        lng: rider.currentLatLong.longitude,
+        type: "rider",
+        body: {},
+      }));
+
+      return mappedCustomerData.concat(mappedRiderData);
+    } catch (error) {
+      console.error("Error fetching data from JSON file:", error);
+      throw error;
+    }
+  }
+);
 
 const selectMapSlice = createSlice({
   name: "selectMap",
@@ -55,14 +87,19 @@ const selectMapSlice = createSlice({
   reducers: {
     updateType(state, action: PayloadAction<string>) {
       state.type = action.payload;
-      // state.filteredMarkers = [];
     },
     filterMarkers(state) {
-      state.filteredMarkers = initialState.filteredMarkers;
       state.filteredMarkers = state.filteredMarkers.filter(
         (marker) => marker.type === state.type
       );
+      console.log("change type to", state.type);
     },
+  },
+  extraReducers: (builder) => {
+    // Handle actions from fetchMarkersFromJson
+    builder.addCase(fetchMarkersFromJson.fulfilled, (state, action) => {
+      state.filteredMarkers = action.payload;
+    });
   },
 });
 

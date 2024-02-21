@@ -2,12 +2,17 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
+import {
+  fetchMarkersFromJson,
+  updateType,
+} from "../features/selectMap/selectMap-slice.ts";
 import "../styles/Map.module.css";
 import styles from "../styles/icons.module.css";
 import RestaurantIcon from "./icons/Restaurant.jsx";
 import RiderIcon from "./icons/Rider";
 import CustomerIcon from "./icons/Customer";
 import HubIcon from "./icons/hub";
+import filterMarkers from "../features/selectMap/selectMap-slice.ts";
 
 const iconDict = {
   restaurant: <RestaurantIcon />,
@@ -17,14 +22,17 @@ const iconDict = {
 };
 
 const MapComponent = () => {
-
-  // const dispatch = useAppDispatch();
-  // const type = useAppSelector((state) => state.selectMap.type);
+  const dispatch = useAppDispatch();
+  const type = useAppSelector((state) => state.selectMap?.type || "");
   const markers = useAppSelector((state) => state.selectMap.filteredMarkers);
+  console.log(markers);
   //console.log(markers);
-  // useEffect(() => {
-  //   dispatch(filterMarkers()); // Assuming filterMarkers does not take any arguments
-  // }, [dispatch, type]);
+  useEffect(() => {
+    // Fetch data and then dispatch actions
+    dispatch(fetchMarkersFromJson()).then(() => {
+      dispatch(updateType(type));
+    });
+  }, [dispatch, type]);
 
   // const markerPosition = {
   //   latitude: 37.7749,
@@ -45,11 +53,12 @@ const MapComponent = () => {
         "pk.eyJ1Ijoibm9lbGFsYW0iLCJhIjoiY2xwNXptZWh0MWo4cTJpczRnOTR2emxxZSJ9.2ysg9xmzMsMmBzuFmiO80A"
       }
     >
-      {markers.map((marker) => (
-        <Marker longitude={marker.lng} latitude={marker.lat}>
-          {iconDict[marker.type]}
-        </Marker>
-      ))}
+      {Array.isArray(markers) &&
+        markers.map((marker) => (
+          <Marker longitude={marker.lng} latitude={marker.lat}>
+            {iconDict[marker.type]}
+          </Marker>
+        ))}
       {/* <Marker longitude={-0.094021} latitude={51.51974}> */}
     </ReactMapGL>
   );
