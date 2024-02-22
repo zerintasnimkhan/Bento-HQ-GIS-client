@@ -9,7 +9,7 @@ export default function Map() {
       <div>
         <Sidebar />
       </div>
-      <div    style={{ width: "85vw", height: "100vh" }}>
+      <div style={{ width: "85vw", height: "100vh" }}>
         {/* <h1>MapComponent</h1> */}
         <MapComponent />
       </div>

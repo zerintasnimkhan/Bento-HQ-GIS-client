@@ -27,11 +27,17 @@ const MapComponent = () => {
   const markers = useAppSelector((state) => state.selectMap.filteredMarkers);
 
   useEffect(() => {
-    // Fetch data and then dispatch actions
     dispatch(fetchMarkersFromJson()).then(() => {
       dispatch(updateType(type));
     });
   }, [dispatch, type]);
+
+  // useEffect (() => {
+  //   if(type) {
+  //     // dispatch(updateType(type))
+  //     dispatch(filterMarkers())
+  //   }
+  // }, [type])
 
   // const markerPosition = {
   //   latitude: 37.7749,
