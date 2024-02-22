@@ -9,7 +9,7 @@ function HubsIcon({ handleClick, isSelected }) {
     onClick={() => handleClick("hub")}>
       <img
         className={styles.icons}
-        src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1707139129/network_si7bxy.png"
+        src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1708583836/charging-hub_lhuelv.png"
       ></img>
     </div>
   );

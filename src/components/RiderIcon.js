@@ -9,7 +9,7 @@ function RiderIcon({ handleClick, isSelected  }) {
     onClick={() => handleClick("rider")}>
       <img
         className={styles.icons}
-        src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1707139130/app_r7z5zi.png"
+        src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1708583837/delivery_ltpejd.png"
       ></img>
     </div>
   );

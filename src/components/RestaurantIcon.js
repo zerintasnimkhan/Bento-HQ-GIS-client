@@ -10,7 +10,7 @@ function RestaurantIcon({ handleClick, isSelected }) {
     >
       <img
         className={styles.icons}
-        src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1707139129/restaurant_gzmskj.png"
+        src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1708583836/restaurant_3_me8xdz.png"
       ></img>
     </div>
   );
