@@ -25,8 +25,7 @@ const MapComponent = () => {
   const dispatch = useAppDispatch();
   const type = useAppSelector((state) => state.selectMap?.type || "");
   const markers = useAppSelector((state) => state.selectMap.filteredMarkers);
-  console.log(markers);
-  //console.log(markers);
+
   useEffect(() => {
     // Fetch data and then dispatch actions
     dispatch(fetchMarkersFromJson()).then(() => {

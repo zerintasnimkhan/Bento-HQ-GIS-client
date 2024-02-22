@@ -59,6 +59,7 @@ export const fetchMarkersFromJson = createAsyncThunk(
         lat: customer.currentLatLong.latitude,
         lng: customer.currentLatLong.longitude,
         type: "customer",
+
         body: {},
       }));
 
@@ -73,7 +74,33 @@ export const fetchMarkersFromJson = createAsyncThunk(
         body: {},
       }));
 
-      return mappedCustomerData.concat(mappedRiderData);
+      const restaurantResponse = await fetch(
+        "https://sak-skeleton-samiya-kazi.koyeb.app/utilization/current/all/?delivery=true"
+      );
+      const restaurantData = await restaurantResponse.json();
+      const mappedRestaurantData = restaurantData.data.map((restaurant) => ({
+        lat: restaurant.restaurantLatitude,
+        lng: restaurant.restaurantLongitude,
+        type: "restaurant",
+        body: {},
+      }));
+      console.log(mappedRestaurantData);
+
+      // const hubResponse = await fetch(
+      //   "https://sak-skeleton-samiya-kazi.koyeb.app/utilization/current/all/?delivery=true"
+      // );
+      // const hubData = await hubResponse.json();
+      // const mappedHubData = hubData.data.map((hub) => ({
+      //   lat: hub.currentLatLong.latitude,
+      //   lng: hub.currentLatLong.longitude,
+      //   type: "hub",
+      //   body: {},
+      // }));
+
+      return mappedCustomerData.concat(
+        mappedRestaurantData, mappedRiderData
+        
+      );
     } catch (error) {
       console.error("Error fetching data from JSON file:", error);
       throw error;
@@ -96,7 +123,6 @@ const selectMapSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Handle actions from fetchMarkersFromJson
     builder.addCase(fetchMarkersFromJson.fulfilled, (state, action) => {
       state.filteredMarkers = action.payload;
     });
