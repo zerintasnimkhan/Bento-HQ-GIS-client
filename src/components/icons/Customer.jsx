@@ -4,8 +4,8 @@ function CustomerIcon() {
   return (
  
     <img
-      height={20}
-      width={20}
+      height={25}
+      width={25}
       src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1708584870/user_2_l7phew.png"
       alt=""
     />

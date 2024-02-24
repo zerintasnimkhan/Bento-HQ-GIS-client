@@ -4,8 +4,8 @@ function RiderIcon() {
   return (
  
     <img
-      height={25}
-      width={25}
+      height={28}
+      width={28}
       src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1708583837/delivery_ltpejd.png"
       alt=""
     />
