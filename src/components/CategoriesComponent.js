@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { filterMarkers, updateType } from "../features/selectMap/selectMap-slice";
+import {
+  filterMarkers,
+  updateType,
+} from "../features/selectMap/selectMap-slice";
 import styles from "../styles/categories.module.css";
 import RestaurantIcon from "./RestaurantIcon";
 import CustomerIcon from "./CustomerIcon";
@@ -26,7 +29,10 @@ function CategoriesComponent() {
         handleClick={handleClick}
         isSelected={selectedType === "customer"}
       />
-      <HubsIcon handleClick={handleClick} isSelected={selectedType === "hub"} />
+      <HubsIcon 
+        handleClick={handleClick} 
+        isSelected={selectedType === "hub"} 
+      />
       <RiderIcon
         handleClick={handleClick}
         isSelected={selectedType === "rider"}

@@ -9,12 +9,14 @@ interface Markers {
 interface Map {
   type: string;
   specifications: any;
+  allMarkers: Markers[];
   filteredMarkers: Markers[];
 }
 
 const initialState: Map = {
   type: "",
   specifications: {},
+  allMarkers: [],
   filteredMarkers: [
     // {
     //   lat: "51.51974",
@@ -116,7 +118,7 @@ const selectMapSlice = createSlice({
       state.type = action.payload;
     },
     filterMarkers(state) {
-      state.filteredMarkers = state.filteredMarkers.filter(
+      state.filteredMarkers = state.allMarkers.filter(
         (marker) => marker.type === state.type
       );
       console.log("change type to", state.type);
@@ -124,7 +126,7 @@ const selectMapSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMarkersFromJson.fulfilled, (state, action) => {
-      state.filteredMarkers = action.payload;
+      state.allMarkers = action.payload;
     });
   },
 });

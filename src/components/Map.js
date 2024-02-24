@@ -24,13 +24,15 @@ const iconDict = {
 const MapComponent = () => {
   const dispatch = useAppDispatch();
   const type = useAppSelector((state) => state.selectMap?.type || "");
-  const markers = useAppSelector((state) => state.selectMap.filteredMarkers);
+  const allMarkers = useAppSelector((state) => state.selectMap.allMarkers);
+  const filteredMarkers = useAppSelector(
+    (state) => state.selectMap.filteredMarkers
+  );
 
   useEffect(() => {
-    dispatch(fetchMarkersFromJson())
-      dispatch(updateType(type));
-    
-  }, [dispatch, type]);
+    dispatch(fetchMarkersFromJson());
+    dispatch(updateType(type));
+  }, []);
 
   // useEffect (() => {
   //   if(type) {
@@ -58,8 +60,16 @@ const MapComponent = () => {
         "pk.eyJ1Ijoibm9lbGFsYW0iLCJhIjoiY2xwNXptZWh0MWo4cTJpczRnOTR2emxxZSJ9.2ysg9xmzMsMmBzuFmiO80A"
       }
     >
-      {Array.isArray(markers) &&
-        markers.map((marker) => (
+      {Array.isArray(allMarkers) &&
+        !type &&
+        allMarkers.map((marker) => (
+          <Marker longitude={marker.lng} latitude={marker.lat}>
+            {iconDict[marker.type]}
+          </Marker>
+        ))}
+      {Array.isArray(filteredMarkers) &&
+        type &&
+        filteredMarkers.map((marker) => (
           <Marker longitude={marker.lng} latitude={marker.lat}>
             {iconDict[marker.type]}
           </Marker>
