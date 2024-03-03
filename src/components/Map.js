@@ -11,7 +11,7 @@ import styles from "../styles/icons.module.css";
 import RestaurantIcon from "./icons/Restaurant.jsx";
 import RiderIcon from "./icons/Rider";
 import CustomerIcon from "./icons/Customer";
-import HubIcon from "./icons/hub";
+import HubIcon from "./icons/Hub.jsx"
 import filterMarkers from "../features/selectMap/selectMap-slice.ts";
 
 const iconDict = {

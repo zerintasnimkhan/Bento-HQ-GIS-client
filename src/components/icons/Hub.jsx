@@ -4,8 +4,8 @@ function HubIcon() {
   return (
  
     <img
-      height={25}
-      width={25}
+      height={50}
+      width={55}
       src="https://res.cloudinary.com/dwrwwcvfb/image/upload/v1708583836/charging-hub_lhuelv.png"
       alt=""
     />

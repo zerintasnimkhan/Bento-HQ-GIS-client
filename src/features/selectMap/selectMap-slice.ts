@@ -88,20 +88,23 @@ export const fetchMarkersFromJson = createAsyncThunk(
       }));
       console.log(mappedRestaurantData);
 
-      // const hubResponse = await fetch(
-      //   "https://sak-skeleton-samiya-kazi.koyeb.app/utilization/current/all/?delivery=true"
-      // );
-      // const hubData = await hubResponse.json();
-      // const mappedHubData = hubData.data.map((hub) => ({
-      //   lat: hub.currentLatLong.latitude,
-      //   lng: hub.currentLatLong.longitude,
-      //   type: "hub",
-      //   body: {},
-      // }));
+      const hubResponse = await fetch(
+        "https://bento-rider.onrender.com/hub/get-all-hubs"
+      );
+      const hubData = await hubResponse.json();
+      console.log(hubData)
+      const mappedHubData = hubData.map((hub) => ({
+        lat: hub.center[1],
+        lng: hub.center[0],
+        type: "hub",
+        body: {},
+      }));
+      console.log(mappedHubData);
 
       return mappedCustomerData.concat(
-        mappedRestaurantData, mappedRiderData
-        
+        mappedRestaurantData,
+        mappedRiderData,
+        mappedHubData
       );
     } catch (error) {
       console.error("Error fetching data from JSON file:", error);
