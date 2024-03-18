@@ -63,7 +63,7 @@ function Riders() {
           Two Order Riders
         </label>
       </div>
-      <div className={styles.time}>
+      {/* <div className={styles.time}>
         <h3>Select Time Range</h3>
         <div className={styles.time}>
           <label>
@@ -88,7 +88,7 @@ function Riders() {
             />
           </label>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

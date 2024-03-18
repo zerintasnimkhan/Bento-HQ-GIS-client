@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { login } from "../services/auth.service";
+import React, { useEffect, useState } from "react";
+import {
+  getUserFromToken,
+  login,
+  verifyToken,
+  verifyUserToken,
+} from "../services/auth.service";
 // import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 import Lottie from "react-lottie";
@@ -13,13 +18,31 @@ const LoginPage = () => {
   // const navigate = useNavigate();
   const router = useRouter();
 
+  useEffect(() => {
+    const verifyToken = async (token) => {
+      return await verifyUserToken(token);
+    };
+
+    const checkAndNavigate = async () => {
+      const token = localStorage.getItem("access-token");
+      if (token) {
+        console.log("token===>", token);
+        router.push("/gis");
+      } else router.push("/login");
+    };
+
+    checkAndNavigate();
+  }, [router]);
+
   const handleLogin = async () => {
     try {
+      console.log("inside login");
       const res = await login(email, password);
-      const token = res;
+      console.log("sucessfully logged in");
+      const token = res.token;
+      console.log("token ===>", token);
       localStorage.setItem("access-token", token);
-      router.push("/map");
-      // navigate("/map");
+      router.push("/gis");
     } catch (error) {
       console.log(error);
     }
@@ -71,19 +94,8 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <button
-            className={styles.button}
-            type="submit"
-            onClick={() => router.push("/map")}
-          >
+          <button className={styles.button} type="button" onClick={handleLogin}>
             Login
-          </button>
-          <button
-            className={styles.button}
-            type="submit"
-            onClick={() => router.push("/map")}
-          >
-            sign up
           </button>
         </form>
       </div>

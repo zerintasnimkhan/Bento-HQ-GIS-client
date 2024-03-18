@@ -33,7 +33,7 @@ function Customers() {
 
   return (
     <div className={styles.spf}>
-      <h3>Utility Level</h3>
+      {/* <h3>Utility Level</h3>
       <div>
         <label className={styles.checkboxes}>
           <input
@@ -89,7 +89,7 @@ function Customers() {
             />
           </label>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

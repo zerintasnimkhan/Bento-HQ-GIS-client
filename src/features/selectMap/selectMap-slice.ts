@@ -4,6 +4,7 @@ interface Markers {
   lng: string;
   type: string;
   body: any;
+  level: string;
 }
 
 interface Map {
@@ -11,44 +12,15 @@ interface Map {
   specifications: any;
   allMarkers: Markers[];
   filteredMarkers: Markers[];
+  selectedLevels: string[];
 }
 
 const initialState: Map = {
   type: "",
   specifications: {},
   allMarkers: [],
-  filteredMarkers: [
-    // {
-    //   lat: "51.51974",
-    //   lng: "-0.094021",
-    //   type: "restaurant",
-    //   body: {},
-    // },
-    // {
-    //   lat: "51.512441",
-    //   lng: "-0.126851",
-    //   type: "customer",
-    //   body: {},
-    // },
-    // {
-    //   lat: "51.513769",
-    //   lng: "-0.19373",
-    //   type: "rider",
-    //   body: {},
-    // },
-    // {
-    //   lat: "51.564367",
-    //   lng: "-0.13494",
-    //   type: "hub",
-    //   body: {},
-    // },
-    // {
-    //   lat: "51.512984",
-    //   lng: "-0.139728",
-    //   type: "hub",
-    //   body: {},
-    // },
-  ],
+  filteredMarkers: [],
+  selectedLevels: [],
 };
 
 export const fetchMarkersFromJson = createAsyncThunk(
@@ -86,20 +58,17 @@ export const fetchMarkersFromJson = createAsyncThunk(
         type: "restaurant",
         body: {},
       }));
-      console.log(mappedRestaurantData);
 
       const hubResponse = await fetch(
         "https://bento-rider.onrender.com/hub/get-all-hubs"
       );
       const hubData = await hubResponse.json();
-      console.log(hubData)
       const mappedHubData = hubData.map((hub) => ({
         lat: hub.center[1],
         lng: hub.center[0],
         type: "hub",
         body: {},
       }));
-      console.log(mappedHubData);
 
       return mappedCustomerData.concat(
         mappedRestaurantData,
@@ -119,12 +88,17 @@ const selectMapSlice = createSlice({
   reducers: {
     updateType(state, action: PayloadAction<string>) {
       state.type = action.payload;
+      state.filteredMarkers = [];
     },
     filterMarkers(state) {
-      state.filteredMarkers = state.allMarkers.filter(
-        (marker) => marker.type === state.type
-      );
-      console.log("change type to", state.type);
+      state.filteredMarkers = state.allMarkers.filter((marker) => {
+        // Check if 'type' and 'level' match
+        return (
+          marker.type === state.type &&
+          (state.selectedLevels.length === 0 ||
+            state.selectedLevels.includes(marker.level))
+        );
+      });
     },
   },
   extraReducers: (builder) => {

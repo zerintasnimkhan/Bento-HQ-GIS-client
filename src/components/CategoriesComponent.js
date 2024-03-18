@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
+  addSpecification,
   filterMarkers,
   updateType,
 } from "../features/selectMap/selectMap-slice";
@@ -29,10 +30,7 @@ function CategoriesComponent() {
         handleClick={handleClick}
         isSelected={selectedType === "customer"}
       />
-      <HubsIcon 
-        handleClick={handleClick} 
-        isSelected={selectedType === "hub"} 
-      />
+      <HubsIcon handleClick={handleClick} isSelected={selectedType === "hub"} />
       <RiderIcon
         handleClick={handleClick}
         isSelected={selectedType === "rider"}

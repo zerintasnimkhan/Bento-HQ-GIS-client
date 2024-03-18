@@ -1,14 +1,16 @@
 "use-client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import styles from "../styles/specification.module.css";
-import { useAppSelector } from "../app/hooks";
+import { filterMarkers } from "../features/selectMap/selectMap-slice";
+// import { addSpecification } from "../../features/selectMap/selectMap-slice";
 
 function SpecificationRestaurant() {
-
-  const type =  useAppSelector((state) => state.selectMap.type);
-  console.log(type);
-
+  const dispatch = useAppDispatch();
+  // const selectedLevel = useAppSelector(
+  //   (state) => state.selectMap.selectedLevels
+  // );
 
   const [checkboxes, setCheckboxes] = useState({
     HU: false,
@@ -16,23 +18,40 @@ function SpecificationRestaurant() {
     LU: false,
   });
 
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [selectedLevels, setSelectedLevels] = useState([]);
 
-  const handleCheckboxChange = (checkboxName) => {
+  useEffect(() => {
+    dispatch(filterMarkers());
+  }, [selectedLevels, dispatch]);
+
+  function getValue(value) {
+    var checkbox = document.getElementById(value);
     setCheckboxes((prevCheckboxes) => ({
       ...prevCheckboxes,
-      [checkboxName]: !prevCheckboxes[checkboxName],
+      [value]: !prevCheckboxes[value],
     }));
-  };
+    if (checkbox.checked) {
+      var checkboxValue = checkbox.value;
+      console.log("Checkbox value:", checkboxValue);
 
-  const handleStartTimeChange = (e) => {
-    setStartTime(e.target.value);
-  };
+      setSelectedLevels((prevSelectedLevels) => [
+        ...prevSelectedLevels,
+        checkboxValue,
+      ]);
 
-  const handleEndTimeChange = (e) => {
-    setEndTime(e.target.value);
-  };
+      //console.log(selectedLevels);
+    } else {
+      setSelectedLevels((prevSelectedLevels) =>
+        prevSelectedLevels.filter((val) => val !== checkbox.value)
+      );
+    }
+    //console.log(selectedLevels);
+  }
+
+  useEffect(() => {
+    dispatch(filterMarkers());
+    console.log(selectedLevels);
+  }, [selectedLevels, dispatch]);
 
   return (
     <div className={styles.spf}>
@@ -41,8 +60,10 @@ function SpecificationRestaurant() {
         <label className={styles.checkboxes}>
           <input
             type="checkbox"
+            id="HU"
+            value="HU"
             checked={checkboxes.HU}
-            onChange={() => handleCheckboxChange("HU")}
+            onChange={() => getValue("HU")}
           />
           HU (High Utilization)
         </label>
@@ -52,8 +73,10 @@ function SpecificationRestaurant() {
         <label className={styles.checkboxes}>
           <input
             type="checkbox"
+            id="MU"
+            value="MU"
             checked={checkboxes.MU}
-            onChange={() => handleCheckboxChange("MU")}
+            onChange={() => getValue("MU")}
           />
           MU (Moderate Utilization)
         </label>
@@ -63,35 +86,13 @@ function SpecificationRestaurant() {
         <label className={styles.checkboxes}>
           <input
             type="checkbox"
+            id="LU"
+            value="LU"
             checked={checkboxes.LU}
-            onChange={() => handleCheckboxChange("LU")}
+            onChange={() => getValue("LU")}
           />
           LU (Low Utilization)
         </label>
-      </div>
-      <div className={styles.time}>
-        <h3>Select Time Range</h3>
-        <div className={styles.time}>
-          <label>
-            Start Time:
-            <input className={styles.inputTime}
-              type="datetime-local"
-              value={startTime}
-              onChange={handleStartTimeChange}
-            />
-          </label>
-        </div>
-
-        <div className={styles.time}>
-          <label>
-            End Time:
-            <input className={styles.inputTime}
-              type="datetime-local"
-              value={endTime}
-              onChange={handleEndTimeChange}
-            />
-          </label>
-        </div>
       </div>
     </div>
   );
