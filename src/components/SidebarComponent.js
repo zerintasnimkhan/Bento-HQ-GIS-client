@@ -20,6 +20,7 @@ const Sidebar = () => {
       {type === "customer" && <Customers />}
       {type === "hub" && <Hubs />}
       {type === "rider" && <Riders />}
+      <button>Logout</button>
     </div>
   );
 };

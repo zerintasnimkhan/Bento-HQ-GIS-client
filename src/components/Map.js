@@ -32,6 +32,7 @@ const MapComponent = () => {
   useEffect(() => {
     dispatch(fetchMarkersFromJson());
     dispatch(updateType(type));
+    //dispatch(selectedMarkers)
   }, []);
 
   // useEffect (() => {

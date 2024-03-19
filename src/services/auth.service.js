@@ -25,6 +25,7 @@ export async function signup(name, email, password) {
   }
 }
 
+
 export async function getUserFromToken(token) {
   try {
     const url = `${baseUrl}/auth/user`;

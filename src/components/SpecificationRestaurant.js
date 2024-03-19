@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import styles from "../styles/specification.module.css";
-import { filterMarkers } from "../features/selectMap/selectMap-slice";
+import { filterMarkers, levelSpecifiedMarkers } from "../features/selectMap/selectMap-slice";
 // import { addSpecification } from "../../features/selectMap/selectMap-slice";
 
 function SpecificationRestaurant() {
@@ -19,9 +19,14 @@ function SpecificationRestaurant() {
   });
 
   const [selectedLevels, setSelectedLevels] = useState([]);
+  const handleCheckboxChange = (level) => {
+    setSelectedLevel(level);
+    dispatch(filterMarkers(level));
+  };
 
   useEffect(() => {
     dispatch(filterMarkers());
+    console.log(selectedLevels)
   }, [selectedLevels, dispatch]);
 
   function getValue(value) {
@@ -38,6 +43,10 @@ function SpecificationRestaurant() {
         ...prevSelectedLevels,
         checkboxValue,
       ]);
+      dispatch(levelSpecifiedMarkers((prevSelectedLevels) => [
+        ...prevSelectedLevels,
+        checkboxValue,
+      ]));
 
       //console.log(selectedLevels);
     } else {
@@ -48,10 +57,10 @@ function SpecificationRestaurant() {
     //console.log(selectedLevels);
   }
 
-  useEffect(() => {
-    dispatch(filterMarkers());
-    console.log(selectedLevels);
-  }, [selectedLevels, dispatch]);
+  // useEffect(() => {
+  //   dispatch(filterMarkers());
+  //   console.log(selectedLevels);
+  // }, [selectedLevels, dispatch]);
 
   return (
     <div className={styles.spf}>

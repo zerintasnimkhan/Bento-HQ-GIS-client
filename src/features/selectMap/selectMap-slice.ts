@@ -82,6 +82,11 @@ export const fetchMarkersFromJson = createAsyncThunk(
   }
 );
 
+export const levelSpecifiedMarkers = (selectedLevel) => (dispatch, getState) => {
+  const markers = getState().selectMap.markers;
+  //const selectedMarkers = markers.filter(marker => marker.level === selectedLevel);
+};
+
 const selectMapSlice = createSlice({
   name: "selectMap",
   initialState,
