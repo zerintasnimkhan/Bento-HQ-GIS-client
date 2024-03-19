@@ -11,7 +11,7 @@ import styles from "../styles/icons.module.css";
 import RestaurantIcon from "./icons/Restaurant.jsx";
 import RiderIcon from "./icons/Rider";
 import CustomerIcon from "./icons/Customer";
-import HubIcon from "./icons/Hub.jsx"
+import HubIcon from "./icons/Hub.jsx";
 import filterMarkers from "../features/selectMap/selectMap-slice.ts";
 
 const iconDict = {
@@ -57,7 +57,7 @@ const MapComponent = () => {
       }}
       mapStyle="mapbox://styles/mapbox/outdoors-v12"
       mapboxAccessToken={
-        "pk.eyJ1Ijoibm9lbGFsYW0iLCJhIjoiY2xwNXptZWh0MWo4cTJpczRnOTR2emxxZSJ9.2ysg9xmzMsMmBzuFmiO80A"
+        "pk.eyJ1Ijoibm9lbGFsYW05OTk5IiwiYSI6ImNsbzEyZHd5MTAzM3kydHBtamE3djluN28ifQ.KPPVnkZ0mpaF5D0AIU635A"
       }
     >
       {Array.isArray(allMarkers) &&
